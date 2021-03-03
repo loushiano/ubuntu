@@ -1,0 +1,3 @@
+- name: Install cscope
+  apt: name=cscope state=latest
+  become_method: sudo

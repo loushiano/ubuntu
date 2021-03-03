@@ -1,0 +1,16 @@
+- name: Git ctags
+  git:
+    repo=https://github.com/universal-ctags/ctags.git
+    dest="{{dotfiles_user_home}}/.ctags/"
+
+- name: Install ctags
+  command: chdir=~/.ctags/ ./autogen.sh
+
+- name: Install ctags
+  command: chdir=~/.ctags/ ./configure
+
+- name: Install ctags
+  command: chdir=~/.ctags/ make
+
+- name: Install ctags
+  command: chdir=~/.ctags/ make install

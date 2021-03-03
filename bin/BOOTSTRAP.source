@@ -1,0 +1,44 @@
+#!/bin/bash
+APT_GET_FLAGS='-y'
+APT_GET_INSTALL_CMD="apt-get $APT_GET_FLAGS install"
+APT_ADD_REPO_CMD="apt-add-repository"
+APT_GET_UPDATE_CMD="apt-get update"
+
+function install_ansible()
+{
+  if ansible --version >/dev/null 2>&1; then
+    : # do nothing
+  else
+    echo "Ansible is not installed. Installing Ansible..."
+
+    echo "Updating packages..."
+    $APT_GET_UPDATE_CMD
+
+    echo "Installing deps..."
+    $APT_GET_INSTALL_CMD software-properties-common
+
+    echo "Adding ppa:ansible/ansible..."
+    $APT_ADD_REPO_CMD ppa:ansible/ansible
+
+    echo "Repop'ing package manager..."
+    $APT_GET_UPDATE_CMD
+
+    echo "Installing Ansible..."
+    $APT_GET_INSTALL_CMD ansible
+  fi
+}
+
+function install_git()
+{
+  if git --version >/dev/null 2>&1; then
+    : do nothing
+  else
+    echo "Git is not installed. Installing Git..."
+
+    echo "Updating packages..."
+    $APT_GET_UPDATE_CMD
+
+    echo "Installing git..."
+    $APT_GET_INSTALL_CMD git
+  fi
+}

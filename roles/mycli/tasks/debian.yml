@@ -1,0 +1,4 @@
+- name: Install mycli with pip
+  pip: 
+    name: mycli
+  become_method: sudo

@@ -1,0 +1,4 @@
+- name: Install openconnect vpn client
+  apt: 
+    name: openconnect
+  become_method: sudo

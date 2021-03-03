@@ -1,0 +1,16 @@
+##################################################
+# Ansible
+##################################################
+dotfiles_user_home: "{{ '~' | expanduser }}"
+dotfiles_home: "{{dotfiles_user_home}}/dotfiles"
+
+##################################################
+# Git
+##################################################
+full_name: Iain Wong
+git_user: iwong
+git_email: iain.wong@cmail.carleton.ca
+
+# GPG Key ID used to sign git commits
+# See https://github.com/pstadler/keybase-gpg-github setup instructions
+git_signing_key:

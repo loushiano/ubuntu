@@ -1,0 +1,244 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              .vimrc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Maintainer: 	Iain Wong
+" Email:		iainwong@cmail.carleton.ca
+" Last Update:	2018-Jan-04
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vundle config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible		" be vimproved
+filetype off            " vundle required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" all vundle plugins must be added AFTER this line
+" -----------------------------------------------------------------------------
+"
+" set Vundle to manage Vundle
+Plugin 'VundleVim/Vundle.vim'
+
+" Utility
+Plugin 'scrooloose/nerdtree'
+
+" Generic Programming Support
+Plugin 'universal-ctags/ctags'
+Plugin 'vim-scripts/cscope.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'ervandew/supertab'
+Plugin 'Townk/vim-autoclose'
+Plugin 'junegunn/fzf'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'benmills/vimux'
+
+" Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'kablamo/vim-git-log'
+Plugin 'gregsexton/gitv'
+
+" Java
+"Plugin 'artur-shaik/vim-javacomplete2'
+
+" Interface
+" Plugin 'ryanoasis/nerd-fonts'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'vim-airline/vim-airline'
+
+" Themes
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'colepeters/spacemacs-theme.vim'
+Plugin 'ajh17/Spacegray.vim'
+Plugin 'sjl/badwolf'
+Plugin 'morhetz/gruvbox'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'vim-airline/vim-airline-themes'
+
+" -----------------------------------------------------------------------------
+" all vundle plugins must be added BEFORE this line
+
+call vundle#end()
+filetype plugin indent on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim behaviour
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set tabstop=4           "tabbing set to (4) spaces                              
+set shiftwidth=4        "autoindent uses (4) spaces                             
+set shiftround          "apply multiples of shiftwidth with '<' and '>'         
+set autoindent          "apply indents automatically                            
+set copyindent          "indent according to previous indentation               
+set smarttab            "tab with shiftwidth, not tabstop, only if needed          
+set expandtab
+
+set ignorecase          "case-insensitive searching                             
+set smartcase           "case-insensitive only when pattern all lowercase          
+set incsearch           "show matches to search in real time                    
+
+set history=1000        "preserve (1000) commands/search history                
+set undolevels=1000     "preserve previous code, for undo                       
+
+set wildignore=*.swp	"ignore these file extensions
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim appearance
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf8		"use UTF-8
+set nowrap              "do not wrap lines                                      
+set t_Co=256            " Use 256 colour terminal                               
+set background=dark     "utilize colours which compliment a dark background        
+set colorcolumn=80      "highlight the 80th column                              
+let base16colorspace=256 "access colors present in 256 colorspace
+
+silent! colorscheme spacegray
+let g:spacegray_underline_search = 1
+let g:spacegray_italicize_comments = 1
+
+set showmatch
+syntax on
+
+set hlsearch
+set showmatch           "show complimenting parenthesis                         
+set laststatus=2
+set ruler               "display current row and column                         
+set number              "display line numbers                                   
+
+set cursorline
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim bindings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                                                                                
+" Set 'action' keys!
+let mapleader = ","     " LEADER Key                                            
+nnoremap ; :                                                                    
+
+" Disable up-down-left-right
+let g:elite_mode=1
+"map <up>    <nop>       " Unbind up arrow                                       
+"map <down>  <nop>       " Unbind down arrow                                     
+"map <left>  <nop>       " Unbind left arrow                                     
+"map <right> <nop>       " Unbind right arrow                                    
+
+" Re-map panel navigation                                                               
+map <C-j> <C-w>j                            " Pane down                          
+map <C-k> <C-w>k                            " Pane up                    
+map <C-l> <C-w>l                            " Pane right                        
+map <C-h> <C-w>h                            " Pane left                         
+
+" Ctags 
+map <Leader><t> <CTRL-]>
+
+" tabbing blocks of text
+vnoremap < <gv                                                                  
+vnoremap > >gv                                                                  
+
+" tab navigation                                                                
+map <Leader>n <esc>:tabprevious<CR>                                             
+map <Leader>m <esc>:tabnext<CR>                                                 
+
+" resizing
+if get(g:, 'elite_mode')
+	nnoremap <Up>	:resize +2<CR>
+	nnoremap <Down>	:resize -2<CR>
+	nnoremap <Left>	:vertical resize +2<CR>
+	nnoremap <Right>	:vertical resize -2<CR>
+endif
+                                                                            
+nmap <silent> <Leader>/ :nohlsearch<CR>     " Clear search highlighting         
+
+" Cscope
+"if has('cscope')
+"  set cscopetag cscopeverbose
+"
+"  set csprg=/usr/bin/cscope
+"  set csto=0
+"  set cst
+"  set csverb
+"
+"  if has('quickfix')
+"    set cscopequickfix=s-,c-,d-,i-,t-,e-
+"  endif
+"
+"  " Find C symbol
+"  nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+"
+"  " Find functions called by this func
+"  nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+"
+"  " Find functions calling this func
+"  nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+"
+"  " Find function definition
+"  nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+"
+"  " Egrep regex
+"  nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+"
+"  " File?
+"  nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+"
+"  " Find files including this file
+"  nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"
+"  " Automatically make cscope connections
+"  function! LoadCscope()
+"      let db = findfile("cscope.out", ".;")
+"      if (!empty(db))
+"          let path = strpart(db, 0, match(db, "/cscope.out$"))
+"          set nocscopeverbose " suppress 'duplicate connection' error
+"          exe "cs add " . db . " " . path
+"          set cscopeverbose
+"      endif
+"  endfunction
+"  au BufEnter /* call LoadCscope()
+"
+"  "cnoreabbrev <expr> csa
+"  "  \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs add'  : 'csa')
+"  "cnoreabbrev <expr> csf
+"  "  \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find' : 'csf')
+"  "cnoreabbrev <expr> csk
+"  "  \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs kill' : 'csk')
+"  "cnoreabbrev <expr> csr
+"  "  \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs reset' : 'csr')
+"  "cnoreabbrev <expr> css
+"  "  \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs show' : 'css')
+"  " cnoreabbrev <expr> csh
+"  "  \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs help' : 'csh')
+"
+"  "command -nargs=0 Cscope cs add $VIMSRC/cscope.out
+"endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='hybrid'
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TagBar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <Leader>i :TagbarToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Leader>t :NERDTreeToggle<CR>
+
+autocmd vimenter * NERDTree " Open NERDTree by default
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " auto close if only tab is nerdtree
+
+let NERDTreeShowHidden=1 " show hidden files
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  vim-devicons
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=UTF-8
+set guifont=DroidSansMono\ Nerd\ Font\ 10

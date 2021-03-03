@@ -1,0 +1,3 @@
+- name: Install git-flow with Apt
+  apt: name="git-flow" state=latest
+  when: ansible_os_family == "Debian"

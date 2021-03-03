@@ -1,0 +1,23 @@
+# INSTALL
+- import_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
+# [TODO] INSTALL PLUGIN MANAGER
+
+# CONFIG
+- name: Check if muttrc exists
+  stat: path="{{dotfiles_user_home}}/.muttrc"
+  register: muttrc_stat
+  failed_when: False
+
+- name: Backup muttrc
+  command: mv ~/.muttrc ~/.muttrc.bak
+  args:
+    creates: "{{dotfiles_user_home}}/.muttrc.bak"
+  when: muttrc_stat.stat.exists
+
+- name: Symlink muttrc
+  file:
+    src: "{{ dotfiles_home }}/roles/mutt/files/muttrc"
+    dest: "{{dotfiles_user_home}}/.muttrc"
+    state: link

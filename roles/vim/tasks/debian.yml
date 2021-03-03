@@ -1,0 +1,15 @@
+- name: Install vim with apt
+  apt: name=vim state=latest
+  become_method: sudo
+
+- name: Install vundle with git
+  git:
+    repo=https://github.com/VundleVim/Vundle.vim
+    dest="{{dotfiles_user_home}}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest="~/.vim/bundle/Vundle.vim"
+
+- name: Prep nerdfont 
+  command: mkdir -p ~/.local/share/fonts
+
+- name: Download nerdfont
+  get_url: url=https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf dest="~/.local/share/fonts/Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete.otf" mode=755

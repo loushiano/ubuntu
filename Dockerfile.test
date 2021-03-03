@@ -1,0 +1,21 @@
+######################################################
+# This is responsible for constructing a ubuntu test
+# image which the ansible setup can be run or tested.
+######################################################
+
+# Set base image to Ubuntu
+FROM ubuntu
+
+# Developer Info
+MAINTAINER Iain Wong
+
+############# BEGIN INSTALLATION #####################
+RUN echo "Constructing generic docker image!"
+
+RUN echo "Creating OS file structure..."
+RUN mkdir /root/dotfiles/
+ADD ./ /root/dotfiles/
+
+WORKDIR /root/
+RUN /root/dotfiles/bin/dockerstrap.sh
+

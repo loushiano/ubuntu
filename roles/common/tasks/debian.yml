@@ -1,0 +1,40 @@
+- name: Install locales with apt
+  apt:
+    name: locales
+  become_method: sudo
+
+- name: Ensure en_US locale exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Ensure ru_RU locale exists
+  locale_gen:
+    name: ru_RU.UTF-8
+    state: present
+
+- name: dev locale
+  action: command update-locale LC_ALL=en_US.UTF-8
+
+- name: set locale
+  command: /usr/sbin/update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+- name: Install man pages
+  apt:
+    name: man-db
+  become_method: sudo
+
+- name: Install autoconf
+  apt:
+    name: autoconf
+  become_method: sudo
+      
+- name: Install pkg-config
+  apt:
+    name: pkg-config
+  become_method: sudo
+
+- name: Install build-essential
+  apt:
+    name: build-essential
+  become_method: sudo

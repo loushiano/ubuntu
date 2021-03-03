@@ -1,0 +1,8 @@
+---
+  dotfiles_repo_url: "https://github.com/iain-wong/dotfiles.git"
+  dotfiles_repo_local_path: "~/Documents/dotfiles"
+  dotfiles_repo_accept_hostkey: no
+
+  dotfiles_home: "~"
+  dotfiles_files:
+    - .vimrc

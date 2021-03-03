@@ -1,0 +1,11 @@
+[local]
+localhost
+
+[devenvs]
+localhost ansible_connection=local
+#foo.example.com
+#bar.example.com
+
+
+[local:vars]
+ansible_connection=local
